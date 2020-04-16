@@ -1,0 +1,6 @@
+[submodule "snake"]
+	path = snake
+	url = https://github.com/Joehoel/snake.git
+[submodule "pong"]
+	path = pong
+	url = https://github.com/Joehoel/pong.git
