@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- <link rel="stylesheet" href="./src/css/styles.css" /> -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+			defer
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"
+		></script>
+		<script defer src="./src/js/Snake.js"></script>
+		<script defer src="./src/js/Fruit.js"></script>
+		<script defer src="./src/js/Grid.js"></script>
+		<script defer src="./src/js/Storage.js"></script>
+		<script defer src="./src/js/firebase.js"></script>
+		<script defer src="./src/js/app.js"></script>
+		<title>Snake</title>
+	</head>
+	<body x-data="{ viewHighscores: false }">
+		<header
+			class="flex justify-between items-center bg-white shadow-lg py-2 px-4 mb-8"
+		>
+			<h1 class="text-4xl font-bold">Snake</h1>
+		</header>
+		<main
+			class="container mx-auto flex flex-col justify-center items-center"
+			style="width: 600px;"
+		>
+			<div
+				class="bg-black bg-opacity-25 w-screen h-screen absolute overflow-hidden inset-0"
+				x-show="viewHighscores"
+			></div>
+			<div
+				class="py-4 px-6 max-w-sm rounded overflow-hidden shadow-lg absolute bg-white w-1/3"
+				x-show="viewHighscores"
+				@click.away="viewHighscores = false"
+			>
+				<div class="flex justify-between mb-2">
+					<h2 class="text-2xl font-semibold">Highscores</h2>
+					<button
+						class="delete text-2xl"
+						@click="viewHighscores = false"
+					>
+						&times;
+					</button>
+				</div>
+
+				<ol id="highscore-list" class="divide-y"></ol>
+			</div>
+			<div class="flex justify-between text-2xl font-bold mb-3 w-full">
+				<h1>Score: <span class="score">0</span></h1>
+				<h1>Highscore: <span class="highscore"></span></h1>
+			</div>
+			<!-- <h3 id="start">Press any key to start...</h3> -->
+			<canvas class="bg-gray-900 rounded shadow-lg"></canvas>
+			<button
+				id="highscore-button"
+				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-4 rounded shadow-lg"
+				@click="viewHighscores = true"
+			>
+				View all highscores
+			</button>
+		</main>
+		<footer
+			class="flex justify-center flex-col items-center bottom-0 fixed flex justify-center w-screen mb-4"
+		>
+			<span class="mb-2 text-lg font-normal">
+				Made by: Joël Kuijper
+			</span>
+			<div class="inner">
+				<a target="_blank" href="https://github.com/Joehoel">
+					<i class="fa fa-github fa-2x"></i></a
+				><a
+					class="mx-2"
+					target="_blank"
+					href="https://www.instagram.com/joel.kuijper/"
+				>
+					<i class="fa fa-instagram fa-2x"></i></a
+				><a target="_blank" href="https://twitter.com/joel_kuijper">
+					<i class="fa fa-twitter fa-2x"></i
+				></a>
+			</div>
+		</footer>
+
+		<script>
+			window.addEventListener("load", () => {
+				firebase.auth().onAuthStateChanged(async user => {
+					console.log()
+					if (user) return
+					window.location = "../login.html"
+				})
+			})
+		</script>
+	</body>
+</html>

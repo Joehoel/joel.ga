@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#start {
+  margin: 1rem;
+}
+
+.footer a,
+.footer a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.scores {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  margin-top: 2rem;
+  font-size: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.footer .inner {
+  margin-top: 1rem;
+}
+
+canvas {
+  background-color: #181818;
+  border: 4px solid rgb(73, 73, 73);
+  box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.31);
+}
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  margin-top: 5px;
+}
+
+.form-group button {
+  margin-top: 5px;
+}
+
+.delete {
+  background-color: #4cafab;
+  border: 1px solid rgb(59, 138, 135);
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+button {
+  background-color: #4cafab;
+  border: 1px solid rgb(59, 138, 135);
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 1rem;
+  position: absolute;
+  box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.31);
+  border: 4px solid rgb(73, 73, 73);
+}
+
+.modal a,
+.modal a:visited {
+  color: #4cafab;
+  text-decoration: none;
+}
+
+.modal button[type="submit"] {
+  width: 100%;
+}
+
+#login-modal,
+#register-modal,
+#highscore-modal {
+  width: 400px;
+}
+
+#highscore-list {
+  margin: 1rem;
+}
+
+#highscore-button {
+  margin-top: 1rem;
+}
+
+.modal h2 {
+  /* text-align: center; */
+  margin-bottom: 1rem;
+}
