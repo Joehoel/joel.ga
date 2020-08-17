@@ -9,6 +9,19 @@
 			rel="stylesheet"
 		/>
 		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"
+		></script>
+		<script defer src="./firebase.js"></script>
+		<script
 			src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
 			defer
 		></script>
@@ -31,16 +44,17 @@
 			<!-- Games grid -->
 			<div class="grid grid-cols-3 gap-4">
 				<div
-					class="card p-2 bg-white rounded overflow-hidden shadow-lg max-w-sm"
+					class="card p-2 bg-white rounded overflow-hidden shadow-lg"
 				>
 					<a class="text-xl font-bold m-2" href="./snake">Snake</a>
 				</div>
 				<div
-					class="card p-2 bg-white rounded overflow-hidden shadow-lg max-w-sm"
+					class="card p-2 bg-white rounded overflow-hidden shadow-lg"
 				>
 					<a class="text-xl font-bold m-2" href="./pong">Pong</a>
 				</div>
 			</div>
 		</main>
+		<script></script>
 	</body>
 </html>

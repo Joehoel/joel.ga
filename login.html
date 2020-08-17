@@ -8,6 +8,19 @@
 			rel="stylesheet"
 		/>
 		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"
+		></script>
+		<script defer src="./firebase.js"></script>
+		<script
 			src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
 			defer
 		></script>
@@ -15,8 +28,29 @@
 	</head>
 	<body>
 		<div class="flex justify-center items-center w-screen h-screen">
-			<div class="w-full max-w-xs" x-data="{ error: false }">
-				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<div
+				class="w-full max-w-xs"
+				x-data="{ email: '', password: '', errors: {} }"
+			>
+				<form
+					method="POST"
+					class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+					x-on:submit.prevent="
+          errors = {}
+          
+          firebase
+						.auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => window.location = document.referrer)
+            .catch(e => {
+              if(e.code.includes('email')) {
+                errors.email = e.message
+              } else {
+                errors.password = e.message
+              }
+            })
+          "
+				>
 					<div class="mb-4">
 						<label
 							class="block text-gray-700 text-sm font-bold mb-2"
@@ -26,10 +60,18 @@
 						</label>
 						<input
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							x-bind:class="{ 'border-red-500': errors.email}"
 							id="email"
 							type="text"
 							placeholder="email"
+							autocomplete="off"
+							x-model="email"
 						/>
+						<p
+							class="text-red-500 text-xs italic"
+							x-show="errors.email !== ''"
+							x-text="errors.email"
+						></p>
 					</div>
 					<div class="mb-6">
 						<label
@@ -39,19 +81,25 @@
 							Password
 						</label>
 						<input
-							class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+							x-bind:class="{ 'border-red-500': errors.password}"
 							id="password"
 							type="password"
 							placeholder="******************"
+							autocomplete="off"
+							x-model="password"
 						/>
-						<p class="text-red-500 text-xs italic">
-							Please choose a password.
-						</p>
+						<p
+							class="text-red-500 text-xs italic"
+							x-show="errors.password !== ''"
+							x-text="errors.password"
+						></p>
 					</div>
 					<div class="flex items-center justify-between">
 						<button
 							class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-							type="button"
+							type="submit"
+							x-bind:disabled="!email || !password"
 						>
 							Sign In
 						</button>
@@ -63,10 +111,19 @@
 						</a>
 					</div>
 				</form>
-				<p class="text-center text-gray-500 text-xs">
-					&copy;2020 Acme Corp. All rights reserved.
-				</p>
 			</div>
 		</div>
+
+		<script>
+			async function login(email, password) {
+				try {
+					await firebase
+						.auth()
+						.signInWithEmailAndPassword(email, password)
+				} catch (e) {
+					errors.password = e.message
+				}
+			}
+		</script>
 	</body>
 </html>
