@@ -1,8 +1,8 @@
 <template>
 	<header class="flex justify-between items-center bg-white shadow-lg py-2 px-4">
-		<h1 class="text-4xl font-bold">Games</h1>
+		<h1 class="text-4xl font-bold">{{$route.name}}</h1>
 		<div class="currentUser flex items-center">
-			<div class="flex flex-col text-right text-md">
+			<div class="flex flex-col text-right text-md" v-if="user">
 				<span>Currently logged in as:</span>
 				<span class="font-semibold">{{user.displayName}}</span>
 			</div>

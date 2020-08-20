@@ -1,6 +1,6 @@
 <template>
 	<ol id="highscore-list" class="divide-y">
-		<li v-for="(user,index) in users" :key="`highscore-${index}`" class="py-2 flex justify-between">
+		<li v-for="(user, index) in users" :key="`highscore-${index}`" class="py-2 flex justify-between">
 			<span class="font-medium">{{user.username}}</span>
 			<span>{{user.highscore}}</span>
 		</li>

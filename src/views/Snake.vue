@@ -11,16 +11,7 @@
 		<HighscoreModal :show="show" :toggle="toggle" />
 
 		<!-- Scores container -->
-		<div class="flex justify-between text-2xl font-bold mb-3 w-full" style="width: 600px;">
-			<h1>
-				Score:
-				<span class="score">0</span>
-			</h1>
-			<h1>
-				Highscore:
-				<span class="highscore">{{highscore}}</span>
-			</h1>
-		</div>
+		<Scores :user="user" />
 		<!-- <h3 id="start">Press any key to start...</h3> -->
 
 		<!-- Game -->
@@ -37,32 +28,25 @@
 
 <script>
 import HighscoreModal from "@/components/HighscoreModal";
+import Scores from "@/components/Scores";
 
-import useToggle from "../hooks/toggle";
-import useAuth from "../hooks/auth";
-import { getHighscore } from "../firebase";
-import { onMounted, ref } from "@vue/composition-api";
+import useToggle from "@/hooks/toggle";
+import useAuth from "@/hooks/auth";
 
 export default {
 	setup() {
-		const highscore = ref(0);
 		const { user } = useAuth();
 		const { show, toggle } = useToggle();
 
-		onMounted(async () => {
-			if (user.value) {
-				highscore.value = await getHighscore(user.value.uid);
-			}
-		});
-
 		return {
-			highscore,
 			show,
 			toggle,
+			user,
 		};
 	},
 	components: {
 		HighscoreModal,
+		Scores,
 	},
 };
 </script>
