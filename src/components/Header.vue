@@ -8,21 +8,7 @@
 </template>
 
 <script>
-import useUser from "../hooks/user.js";
-import { onMounted } from "@vue/composition-api";
-import { login } from "../firebase";
-
-export default {
-	setup() {
-		const { user } = useUser();
-		onMounted(async () => {
-			await login("jmkuijper@outlook.com", "Edcyhn2003");
-			console.log(user.value.displayName);
-		});
-
-		return { user };
-	},
-};
+export default {};
 </script>
 
 <style scoped>

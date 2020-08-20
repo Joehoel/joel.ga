@@ -20,7 +20,6 @@ export const db = firebase.firestore()
 export default firebase
 
 export async function login(email, password) {
-	console.log("Loggin in")
 	if (email.trim() == "" || password.trim() == "") return
 
 	try {
@@ -60,5 +59,25 @@ export async function writeUserData(user) {
 		await userRef.set(user)
 	} catch (e) {
 		console.error(e)
+	}
+}
+
+export async function getHighscore(uid) {
+	const docRef = await db
+		.collection("users")
+		.doc(uid)
+		.get()
+	const highscore = await docRef.data().highscore
+	return highscore
+}
+
+export async function updateHighscore(uid, highscore) {
+	if (highscore >= (await getHighscore(uid))) {
+		console.log("Updating highscore to: ", highscore)
+		db.collection("users")
+			.doc(uid)
+			.update({
+				highscore,
+			})
 	}
 }

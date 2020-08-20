@@ -1,7 +1,7 @@
 import { auth } from "../firebase"
 import { ref, onMounted, onUnmounted } from "@vue/composition-api"
 
-const useUser = () => {
+const useAuth = () => {
 	const user = ref(auth.currentUser)
 	let unsubscribe
 
@@ -20,4 +20,4 @@ const useUser = () => {
 	}
 }
 
-export default useUser
+export default useAuth

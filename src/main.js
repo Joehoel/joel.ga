@@ -1,13 +1,13 @@
 import Vue from "vue"
+import VueCompositionAPI from "@vue/composition-api"
 import App from "./App.vue"
 import router from "./router"
-import VueCompositionAPI from "@vue/composition-api"
 import { firestorePlugin } from "vuefire"
 
 import "./assets/styles/index.css"
 
-Vue.use(firestorePlugin)
 Vue.use(VueCompositionAPI)
+Vue.use(firestorePlugin)
 
 Vue.config.productionTip = false
 
