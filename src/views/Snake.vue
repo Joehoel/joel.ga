@@ -40,7 +40,7 @@ import HighscoreModal from "@/components/HighscoreModal";
 
 import useToggle from "../hooks/toggle";
 import useAuth from "../hooks/auth";
-import { getHighscore, login } from "../firebase";
+import { getHighscore } from "../firebase";
 import { onMounted, ref } from "@vue/composition-api";
 
 export default {
@@ -50,7 +50,6 @@ export default {
 		const { show, toggle } = useToggle();
 
 		onMounted(async () => {
-			await login("jmkuijper@outlook.com", "Edcyhn2003");
 			if (user.value) {
 				highscore.value = await getHighscore(user.value.uid);
 			}
