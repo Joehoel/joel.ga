@@ -5,6 +5,7 @@ import Login from "../views/Login.vue"
 import Register from "../views/Register.vue"
 import Snake from "../views/Snake.vue"
 import Pong from "../views/Pong.vue"
+import { auth } from "@/firebase"
 // import useAuth from "@/hooks/auth"
 Vue.use(VueRouter)
 
@@ -53,12 +54,17 @@ const router = new VueRouter({
 	routes,
 })
 
+let currentUser = null
+auth.onAuthStateChanged(async user => {
+	currentUser = user
+})
+
 // const { user } = useAuth()
 // This callback runs before every route change, including on page load.
 router.beforeEach((to, from, next) => {
 	// This goes through the matched routes from last to first, finding the closest route with a title.
 	// eg. if we have /some/deep/nested/route and /some, /deep, and /nested have titles, nested's will be chosen.
-	// const nearestWithAuth = to.matched.some(record => record.meta.requiresAuth)
+	const nearestWithAuth = to.matched.some(record => record.meta.requiresAuth)
 	// this route requires auth, check if logged in
 	// if not, redirect to login page.
 	const nearestWithTitle = to.matched
@@ -76,11 +82,11 @@ router.beforeEach((to, from, next) => {
 	// 	.reverse()
 	// 	.find(r => r.meta && r.meta.metaTags)
 
-	// if (nearestWithAuth && !user.value) {
-	// 	next({
-	// 		name: "/login",
-	// 	})
-	// }
+	if (nearestWithAuth && !currentUser) {
+		next({
+			path: "/login",
+		})
+	}
 
 	// If a route with a title was found, set the document (page) title to that value.
 	if (nearestWithTitle) document.title = nearestWithTitle.meta.title

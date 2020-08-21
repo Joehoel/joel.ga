@@ -73,7 +73,6 @@ export async function getHighscore(uid) {
 
 export async function updateHighscore(uid, highscore) {
 	if (highscore >= (await getHighscore(uid))) {
-		console.log("Updating highscore to: ", highscore)
 		db.collection("users")
 			.doc(uid)
 			.update({
