@@ -6,8 +6,11 @@
 		<h1 class="text-4xl font-bold">{{$route.name}}</h1>
 		<div class="currentUser flex items-center">
 			<div class="flex flex-col text-right text-md" v-if="user">
-				<span>Currently logged in as:</span>
+				<span>Logged in as:</span>
 				<span class="font-semibold">{{user.displayName}}</span>
+			</div>
+			<div v-else-if="!user && $route.name !== 'Login'">
+				<router-link class="text-lg font-semibold text-blue-500" to="/login">Login</router-link>
 			</div>
 
 			<!-- <router-link to="/login" class="text-lg font-semibold text-blue-500">Login</router-link> -->

@@ -1,10 +1,22 @@
-import { db } from "../firebase"
+import { db } from "@/firebase"
 
-const useUsers = async () => {
-	const snapshot = await db.collection("users").get()
-	const users = snapshot.docs.map(doc => doc.data())
-	users.sort((a, b) => b.highscore - a.highscore)
-	return users
+export default function useUsers() {
+	const getUsers = async () => {
+		const snapshot = await db.collection("users").get()
+		const users = snapshot.docs.map(doc => doc.data())
+		return users
+	}
+
+	const getUser = async uid => {
+		const snapshot = await db
+			.collection("users")
+			.doc(uid)
+			.get()
+		return snapshot
+	}
+
+	return {
+		getUser,
+		getUsers,
+	}
 }
-
-export default useUsers

@@ -1,6 +1,7 @@
 import firebase from "firebase/app"
 import "firebase/firestore"
 import "firebase/auth"
+import "firebase/analytics"
 
 const config = {
 	apiKey: "AIzaSyDQLAHciwtLFm6BIo7m9SkrcBec2dnnCs0",
@@ -10,10 +11,12 @@ const config = {
 	storageBucket: "snake-4e27f.appspot.com",
 	messagingSenderId: "416579751449",
 	appId: "1:416579751449:web:e1a1ff37e06dd10bb2a488",
+	measurementId: "G-RLR0TCSHS2",
 }
 
 // Initialize Firebase
 firebase.initializeApp(config)
+firebase.analytics()
 
 export const auth = firebase.auth()
 export const db = firebase.firestore()

@@ -45,15 +45,17 @@ import Scores from "@/components/Scores";
 
 import useToggle from "@/hooks/toggle";
 import useAuth from "@/hooks/auth";
+import useHighscore from "@/hooks/highscore";
 import Vector2 from "@/utils/Vector2";
 import Grid from "@/utils/Grid";
 import { onMounted, ref } from "@vue/composition-api";
-import { updateHighscore } from "@/firebase";
+// import { updateHighscore } from "@/firebase";
 
 export default {
 	setup() {
 		const { user } = useAuth();
 		const { show, toggle } = useToggle();
+		const { updateHighscore } = useHighscore();
 
 		const size = ref(new Vector2(600, 600));
 		const scale = ref(size.value.x / 15);
