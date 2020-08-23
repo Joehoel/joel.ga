@@ -2,7 +2,6 @@ import { auth, db } from "@/firebase"
 import { ref, onMounted, onUnmounted } from "@vue/composition-api"
 
 export default function useAuth() {
-	// auth.signOut()
 	const user = ref(auth.currentUser)
 	let unsubscribe
 
@@ -35,6 +34,10 @@ export default function useAuth() {
 		}
 
 		return { user, error }
+	}
+
+	const logout = () => {
+		auth.signOut()
 	}
 
 	const register = async (email, username, password) => {
@@ -74,6 +77,7 @@ export default function useAuth() {
 	return {
 		user,
 		login,
+		logout,
 		register,
 	}
 }

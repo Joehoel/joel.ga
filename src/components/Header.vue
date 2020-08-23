@@ -1,16 +1,21 @@
 <template>
 	<header
-		class="flex justify-between items-center bg-white shadow-lg py-2 px-4"
+		class="flex justify-between items-center bg-white shadow-lg py-2 px-4 w-screen"
 		:class="{ 'fixed w-screen': $route.name == 'Login' || $route.name == 'Register' }"
 	>
 		<h1 class="text-4xl font-bold">{{$route.name}}</h1>
 		<div class="currentUser flex items-center">
 			<div class="flex flex-col text-right text-md" v-if="user">
-				<span>Logged in as:</span>
-				<span class="font-semibold">{{user.displayName}}</span>
+				<button
+					@click="logout"
+					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+				>Logout</button>
 			</div>
-			<div v-else-if="!user && $route.name !== 'Login'">
-				<router-link class="text-lg font-semibold text-blue-500" to="/login">Login</router-link>
+			<div v-else-if="!user && $route.name !== 'Login' && $route.name !== 'Register'">
+				<router-link
+					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+					to="/login"
+				>Login</router-link>
 			</div>
 
 			<!-- <router-link to="/login" class="text-lg font-semibold text-blue-500">Login</router-link> -->
@@ -23,9 +28,9 @@ import useAuth from "@/hooks/auth";
 
 export default {
 	setup() {
-		const { user } = useAuth();
+		const { user, logout } = useAuth();
 
-		return { user };
+		return { user, logout };
 	},
 };
 </script>
