@@ -1,10 +1,11 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Home from "../views/Home.vue"
-import Login from "../views/Login.vue"
-import Register from "../views/Register.vue"
-import Snake from "../views/Snake.vue"
-import Pong from "../views/Pong.vue"
+import Home from "@/views/Home.vue"
+import Login from "@/views/Login.vue"
+import Register from "@/views/Register.vue"
+import Snake from "@/views/Snake.vue"
+import Pong from "@/views/Pong.vue"
+import Hangman from "@/views/Hangman.vue"
 // import { auth } from "@/firebase"
 // import useAuth from "@/hooks/auth"
 Vue.use(VueRouter)
@@ -43,6 +44,15 @@ const routes = [
 		component: Pong,
 		meta: {
 			title: "joel.ga - Pong",
+			requiresAuth: true,
+		},
+	},
+	{
+		path: "/hangman",
+		name: "Hangman",
+		component: Hangman,
+		meta: {
+			title: "joel.ga - Hangman",
 			requiresAuth: true,
 		},
 	},
