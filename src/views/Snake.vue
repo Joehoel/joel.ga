@@ -1,41 +1,43 @@
 <template>
-	<main class="flex flex-col justify-center items-center mt-16">
+	<main class="flex flex-col justify-center items-center">
 		<!-- Highscore overlay -->
-		<div
-			class="bg-black bg-opacity-25 w-screen h-screen absolute overflow-hidden inset-0"
-			v-show="show"
-			@click="toggle"
-		></div>
+		<div class="bg-white rounded shadow-lg pt-10 px-16 flex flex-col items-center mt-8">
+			<div
+				class="bg-black bg-opacity-25 w-screen h-screen absolute overflow-hidden inset-0"
+				v-show="show"
+				@click="toggle"
+			></div>
 
-		<!-- Highscore modal -->
-		<HighscoreModal :show="show" :toggle="toggle" />
+			<!-- Highscore modal -->
+			<HighscoreModal :show="show" :toggle="toggle" />
 
-		<!-- Scores container -->
-		<Scores :score="score" />
-		<!-- <h3 id="start">Press any key to start...</h3> -->
+			<!-- Scores container -->
+			<Scores :score="score" />
+			<!-- <h3 id="start">Press any key to start...</h3> -->
 
-		<!-- Game -->
-		<svg :width="size.x" :height="size.y" class="game" style="overflow: visible;">
-			<rect x="0" y="0" :width="size.x" :height="size.y" fill="#181818" />
-			<rect :x="position.x" :y="position.y" :width="scale" :height="scale" fill="#efefef" />
-			<rect
-				v-for="(piece, index) in tail"
-				:key="`piece-${index}`"
-				:x="piece.x"
-				:y="piece.y"
-				:width="scale"
-				:height="scale"
-				fill="#fff"
-			/>
-			<rect :x="fruit.x" :y="fruit.y" :width="scale" :height="scale" fill="#2B6CB0" />
-		</svg>
+			<!-- Game -->
+			<svg :width="size.x" :height="size.y" class="game" style="overflow: visible;">
+				<rect x="0" y="0" :width="size.x" :height="size.y" fill="#181818" />
+				<rect :x="position.x" :y="position.y" :width="scale" :height="scale" fill="#fff" />
+				<rect
+					v-for="(piece, index) in tail"
+					:key="`piece-${index}`"
+					:x="piece.x"
+					:y="piece.y"
+					:width="scale"
+					:height="scale"
+					fill="#fff"
+				/>
+				<rect :x="fruit.x" :y="fruit.y" :width="scale" :height="scale" fill="#4299E1" />
+			</svg>
 
-		<!-- View Highscores button -->
-		<button
-			id="highscore-button"
-			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-4 rounded shadow-lg"
-			@click="toggle"
-		>View all highscores</button>
+			<!-- View Highscores button -->
+			<button
+				id="highscore-button"
+				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-4 rounded shadow-lg"
+				@click="toggle"
+			>View all highscores</button>
+		</div>
 	</main>
 </template>
 
@@ -69,10 +71,8 @@ export default {
 
 		const position = ref(
 			new Vector2(
-				(Math.floor(Math.random() * grid.value.rows - 1) + 1) *
-					scale.value,
-				(Math.floor(Math.random() * grid.value.columns - 1) + 1) *
-					scale.value
+				(Math.floor(Math.random() * grid.value.rows - 1) + 1) * scale.value,
+				(Math.floor(Math.random() * grid.value.columns - 1) + 1) * scale.value
 			)
 		);
 
@@ -80,10 +80,8 @@ export default {
 		const speed = ref(new Vector2(0, 0));
 		const fruit = ref(
 			new Vector2(
-				(Math.floor(Math.random() * grid.value.rows - 1) + 1) *
-					scale.value,
-				(Math.floor(Math.random() * grid.value.columns - 1) + 1) *
-					scale.value
+				(Math.floor(Math.random() * grid.value.rows - 1) + 1) * scale.value,
+				(Math.floor(Math.random() * grid.value.columns - 1) + 1) * scale.value
 			)
 		);
 
@@ -121,10 +119,8 @@ export default {
 			check();
 			if (eat(fruit.value)) {
 				fruit.value = new Vector2(
-					(Math.floor(Math.random() * grid.value.rows - 1) + 1) *
-						scale.value,
-					(Math.floor(Math.random() * grid.value.columns - 1) + 1) *
-						scale.value
+					(Math.floor(Math.random() * grid.value.rows - 1) + 1) * scale.value,
+					(Math.floor(Math.random() * grid.value.columns - 1) + 1) * scale.value
 				);
 			}
 		};
