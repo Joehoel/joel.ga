@@ -32,26 +32,6 @@ export default {
 			playable: true,
 		});
 
-		// const words = [];
-
-		// const selectedWord = ref(words[Math.floor(Math.random() * words.length)]);
-
-		console.log(state.selectedWord);
-
-		// const correctLetters = ref([]);
-		// const wrongLetters = ref([]);
-		// const playable = ref(true);
-
-		// const playAgain = () => {
-		// 	state.playable = true;
-
-		// 	state.correctLetters = [];
-		// 	state.wrongLetters = [];
-
-		// 	state.selectedWord =
-		// 		state.words[Math.floor(Math.random() * state.words.length)];
-		// };
-
 		const handleKeydown = (event) => {
 			const { key, keyCode } = event;
 			if (state.playable && keyCode >= 65 && keyCode <= 90) {
