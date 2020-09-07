@@ -1,7 +1,7 @@
 <template>
-	<main class="flex flex-col justify-center items-center">
+	<main class="flex flex-col justify-center items-center mt-8">
 		<!-- Highscore overlay -->
-		<div class="bg-white rounded shadow-lg pt-10 px-16 flex flex-col items-center mt-8">
+		<div class="bg-white rounded shadow-lg pt-10 px-16 flex flex-col items-center justify-center">
 			<div
 				class="bg-black bg-opacity-25 w-screen h-screen absolute overflow-hidden inset-0"
 				v-show="show"

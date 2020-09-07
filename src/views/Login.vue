@@ -4,31 +4,31 @@
 			<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="handleSubmit">
 				<div class="mb-4">
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-					<ValidationProvider name="Email" rules="required|email" v-slot="{errors}">
+					<ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
 						<input
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							:class="{ 'border-red-500': errors[0]}"
+							:class="{ 'border-red-500': errors[0] }"
 							id="email"
 							type="text"
 							placeholder="email"
 							autocomplete="off"
 							v-model="email"
 						/>
-						<p class="text-red-500 text-xs italic">{{errors[0]}}</p>
+						<p class="text-red-500 text-xs italic">{{ errors[0] }}</p>
 					</ValidationProvider>
 				</div>
 				<div class="mb-4">
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
 					<input
 						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-						:class="{ 'border-red-500': errors.password}"
+						:class="{ 'border-red-500': errors.password }"
 						id="password"
 						type="password"
 						placeholder="******************"
 						autocomplete="off"
 						v-model="password"
 					/>
-					<p class="text-red-500 text-xs italic">{{errors.password}}</p>
+					<p class="text-red-500 text-xs italic">{{ errors.password }}</p>
 				</div>
 				<div class="flex items-center justify-between">
 					<button
@@ -89,5 +89,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

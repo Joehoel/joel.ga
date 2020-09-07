@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="py-4 px-6 max-w-sm rounded overflow-hidden shadow-lg absolute bg-white w-1/3"
+		class="py-4 px-6 max-w-sm rounded overflow-hidden shadow-lg absolute bg-white w-1/3 mb-8"
 		v-show="show"
 	>
 		<div class="flex justify-between mb-2">

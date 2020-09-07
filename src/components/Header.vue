@@ -24,10 +24,9 @@
 				>Logout</button>
 			</div>
 			<div v-else-if="!user && $route.name !== 'Login' && $route.name !== 'Register'">
-				<router-link
-					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-					to="/login"
-				>Login</router-link>
+				<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+					<router-link to="/login">Login</router-link>
+				</button>
 			</div>
 
 			<!-- <router-link to="/login" class="text-lg font-semibold text-blue-500">Login</router-link> -->

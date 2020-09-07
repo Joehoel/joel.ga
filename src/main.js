@@ -1,7 +1,8 @@
 import Vue from "vue"
 import VueCompositionAPI from "@vue/composition-api"
 import { firestorePlugin } from "vuefire"
-import App from "./App.vue"
+import firebase from "./firebase"
+import App from "./App"
 import router from "./router"
 // import VeeValidate from "vee-validate"
 
@@ -14,7 +15,18 @@ Vue.use(firestorePlugin)
 
 Vue.config.productionTip = false
 
-new Vue({
-	router,
-	render: h => h(App),
-}).$mount("#app")
+let app = ""
+firebase.auth().onAuthStateChanged(() => {
+	if (!app) {
+		app = new Vue({
+			router,
+			// store,
+			render: h => h(App),
+		}).$mount("#app")
+	}
+})
+
+// new Vue({
+// 	router,
+// 	render: h => h(App),
+// }).$mount("#app")
