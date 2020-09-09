@@ -1,6 +1,6 @@
 <template>
 	<main
-		class="flex flex-col justify-center items-center mt-16 py-4 bg-white rounded shadow-lg container mx-auto px-4 text-center relative"
+		class="container relative flex flex-col items-center justify-center px-4 py-4 mx-auto mt-16 text-center bg-white rounded shadow-lg"
 	>
 		<Figure :wrongLetters="state.wrongLetters" />
 		<Word :selectedWord="state.selectedWord" :correctLetters="state.correctLetters" />

@@ -1,9 +1,9 @@
 <template>
-	<main class="flex flex-col justify-center items-center mt-8">
+	<main class="flex flex-col items-center justify-center mt-8">
 		<!-- Highscore overlay -->
-		<div class="bg-white rounded shadow-lg pt-10 px-16 flex flex-col items-center justify-center">
+		<div class="flex flex-col items-center justify-center px-16 pt-10 bg-white rounded shadow-lg">
 			<div
-				class="bg-black bg-opacity-25 w-screen h-screen absolute overflow-hidden inset-0"
+				class="absolute inset-0 w-screen h-screen overflow-hidden bg-black bg-opacity-25"
 				v-show="show"
 				@click="toggle"
 			></div>
@@ -34,7 +34,7 @@
 			<!-- View Highscores button -->
 			<button
 				id="highscore-button"
-				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-4 rounded shadow-lg"
+				class="px-4 py-2 m-4 font-bold text-white bg-blue-500 rounded shadow-lg hover:bg-blue-700"
 				@click="toggle"
 			>View all highscores</button>
 		</div>

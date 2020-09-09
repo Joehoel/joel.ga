@@ -1,11 +1,11 @@
 <template>
 	<div
-		class="py-4 px-6 max-w-sm rounded overflow-hidden shadow-lg absolute bg-white w-1/3 mb-8"
+		class="absolute w-1/3 max-w-sm px-6 py-4 mb-8 overflow-hidden bg-white rounded shadow-lg"
 		v-show="show"
 	>
 		<div class="flex justify-between mb-2">
 			<h2 class="text-2xl font-semibold">Highscores</h2>
-			<button class="delete text-2xl" @click="toggle">&times;</button>
+			<button class="text-2xl delete" @click="toggle">&times;</button>
 		</div>
 
 		<!-- Highscore list -->
