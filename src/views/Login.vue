@@ -72,7 +72,7 @@ export default {
 					errors.password = err.value.message;
 				}
 			} else {
-				router.push("/");
+				await router.push("/");
 			}
 			email.value = "";
 			password.value = "";
@@ -88,5 +88,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped></style>
