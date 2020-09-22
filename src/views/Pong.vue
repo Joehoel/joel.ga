@@ -23,7 +23,7 @@
 			<rect
 				v-for="(paddle, index) in paddles.values()"
 				:key="`paddle-${index}`"
-				:transform="`translate(${paddle.pos.x - paddle.size.x /2},${paddle.pos.y - paddle.size.y/2})`"
+				:transform="`translate(${paddle.pos.x - paddle.size.x / 2},${paddle.pos.y - paddle.size.y/2})`"
 				:width="paddle.size.x"
 				:height="paddle.size.y"
 				fill="#fff"
@@ -56,7 +56,7 @@ export default {
 
 		const size = ref(new Vector2(600, 400));
 
-		const ball = ref(new Ball(new Vector2(0, 0), new Vector2(1, 1), 6));
+		const ball = ref(new Ball(new Vector2(0, 0), new Vector2(0, 0), 6));
 		const paddles = ref(
 			new Map([
 				[
@@ -69,7 +69,25 @@ export default {
 				],
 			])
 		);
-		const walls = ref([]);
+		const wallSize = new Vector2(2 * size.value.x, size.value.y);
+		const walls = ref([
+			new Wall(
+				new Vector2(0, -size.value.y / 2 - wallSize.y / 2),
+				new Vector2(wallSize.x, wallSize.y)
+			),
+			new Wall(
+				new Vector2(size.value.x / 2 + wallSize.y / 2, 0),
+				new Vector2(wallSize.y, wallSize.x)
+			),
+			new Wall(
+				new Vector2(0, size.value.y / 2 + wallSize.y / 2),
+				new Vector2(wallSize.x, wallSize.y)
+			),
+			new Wall(
+				new Vector2(-size.value.x / 2 - wallSize.y / 2, 0),
+				new Vector2(wallSize.y, wallSize.x)
+			),
+		]);
 
 		const started = ref(false);
 		const loop = ref(null);
@@ -85,11 +103,9 @@ export default {
 
 		onMounted(() => {
 			loading.value = false;
-			size.value.set(size.x, size.y);
 			started.value = true;
 			window.addEventListener("keydown", handleKeydown);
 			window.addEventListener("keyup", handleKeyup);
-			ball.value.set(ball);
 			walls.value.forEach((wall) => {
 				walls.value.push(
 					new Wall(
@@ -124,8 +140,8 @@ export default {
 			}
 
 			function tick() {
-				ball.value.pos.add(ball.value.speed);
-				paddles.value.forEach((paddle) => paddle.pos.add(paddle.speed));
+				// ball.value.pos.add(ball.value.speed);
+				// paddles.value.forEach((paddle) => paddle.pos.add(paddle.speed));
 			}
 
 			function handleKeydown(e) {
@@ -140,7 +156,7 @@ export default {
 				const move = keycodeToMove.value.get(e.keyCode);
 				if (!pressedKeys.value.includes(move)) return;
 
-				pressedKeys.value.splice(pressedKeys.indexOf(move), 1);
+				pressedKeys.value.splice(pressedKeys.value.indexOf(move), 1);
 				updateLastMove();
 			}
 
