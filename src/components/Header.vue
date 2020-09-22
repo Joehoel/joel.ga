@@ -53,10 +53,10 @@ export default {
 				name: "hangman",
 				path: "/hangman",
 			},
-			{
-				name: "pong",
-				path: "/pong",
-			},
+			// {
+			// 	name: "pong",
+			// 	path: "/pong",
+			// },
 		];
 
 		return { user, logout, routes };
