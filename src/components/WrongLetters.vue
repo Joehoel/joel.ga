@@ -9,22 +9,8 @@
 </template>
 
 <script>
-// import { computed } from "@vue/composition-api";
 export default {
 	props: ["wrongLetters"],
-	// setup({ wrongLetters }) {
-	// 	const letters = computed(() => {
-	// 		wrongLetters
-	// 			.map((letter, i) => <span key={i}>{{ letter }}</span>)
-	// 			.reduce(
-	// 				(prev, curr) =>
-	// 					prev === null ? [curr] : [prev, ", ", curr],
-	// 				null
-	// 			);
-	// 	});
-
-	// 	return { letters };
-	// },
 };
 </script>
 

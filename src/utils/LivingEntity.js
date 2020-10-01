@@ -7,7 +7,7 @@ export default class LivingEntity extends Entity {
 		this.speed = speed;
 	}
 
-	public(other) {
+	set(other) {
 		super.set(other);
 		this.speed.set(other.speed.x, other.speed.y);
 	}
