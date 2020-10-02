@@ -56,6 +56,7 @@
 						>Register</router-link
 					>
 				</div>
+				<GoogleLogin />
 			</form>
 		</div>
 	</div>
@@ -64,14 +65,13 @@
 <script>
 import { ValidationProvider } from "vee-validate";
 import { ref, reactive } from "@vue/composition-api";
-// import { login } from "../firebase";
-// import { auth } from "@/firebase";
+import GoogleLogin from "@/components/GoogleLogin";
 import router from "@/router";
 import useAuth from "@/hooks/auth";
 
 export default {
 	setup() {
-		const { login } = useAuth();
+		const { login, loginWithGoogle } = useAuth();
 
 		const email = ref("");
 		const password = ref("");
@@ -97,9 +97,10 @@ export default {
 		// 	if (user) router.push("/");
 		// });
 
-		return { email, password, errors, handleSubmit };
+		return { email, password, errors, handleSubmit, loginWithGoogle };
 	},
 	components: {
+		GoogleLogin,
 		ValidationProvider,
 	},
 };

@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="flex justify-between items-center bg-white shadow-lg py-2 px-4 w-screen select-none"
+		class="flex justify-between items-center bg-white py-2 shadow-lg px-4 w-screen select-none"
 		:class="{
 			'fixed w-screen': $route.name == 'Login' || $route.name == 'Register',
 		}"
@@ -13,7 +13,11 @@
 			<ul class="flex font-semibold">
 				<li v-for="(route, i) in routes" :key="i">
 					<router-link
-						class="mr-6 text-gray-800 hover:text-black"
+						v-if="route.name !== 'Login' && route.name !== 'Register'"
+						class="mr-6 pb-4"
+						:class="{
+							'border-b-2 border-black font-bold': $route.path == route.path,
+						}"
 						:to="route.path"
 						>{{ route.name }}</router-link
 					>
@@ -24,23 +28,23 @@
 		<!-- Auth container -->
 		<div class="currentUser flex items-center">
 			<div class="flex flex-col text-right text-md" v-if="user">
-				<button
-					@click="logout"
-					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-				>
-					Logout
-				</button>
+				<router-link to="/login">
+					<button
+						@click="logout"
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+					>
+						Logout
+					</button>
+				</router-link>
 			</div>
-			<div
-				v-else-if="
-					!user && $route.name !== 'Login' && $route.name !== 'Register'
-				"
-			>
-				<button
-					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-				>
-					<router-link to="/login">Login</router-link>
-				</button>
+			<div v-if="!user">
+				<router-link to="/login">
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+					>
+						Login
+					</button>
+				</router-link>
 			</div>
 
 			<!-- <router-link to="/login" class="text-lg font-semibold text-blue-500">Login</router-link> -->
@@ -50,33 +54,18 @@
 
 <script>
 import useAuth from "@/hooks/auth";
+import { computed } from "@vue/composition-api";
+import { useRouter } from "@u3u/vue-hooks";
 
 export default {
 	setup() {
 		const { user, logout } = useAuth();
-		const routes = [
-			{
-				name: "home",
-				path: "/",
-			},
-			{
-				name: "snake",
-				path: "/snake",
-			},
-			{
-				name: "hangman",
-				path: "/hangman",
-			},
-			{
-				name: "pong",
-				path: "/pong",
-			},
-		];
+		const { route, router } = useRouter();
+		const routes = router.options.routes;
 
 		return { user, logout, routes };
 	},
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

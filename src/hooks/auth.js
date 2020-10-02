@@ -1,5 +1,6 @@
-import { auth, db } from "@/firebase";
+import { auth, db, googleProvider } from "@/firebase";
 import { ref, onMounted, onUnmounted } from "@vue/composition-api";
+import router from "@/router";
 
 export default function useAuth() {
 	const user = ref(auth.currentUser);
@@ -29,8 +30,39 @@ export default function useAuth() {
 				password
 			);
 			user.value = firebaseUser;
+			router.push("/");
 		} catch (e) {
 			error.value = e;
+		}
+
+		return { user, error };
+	};
+
+	const loginWithGoogle = async () => {
+		console.log("Logging in with google");
+		const user = ref({});
+		const error = ref(null);
+
+		try {
+			const result = await auth.signInWithPopup(googleProvider);
+			const token = await result.credential.accesToken;
+			const firebaseUser = await result.user;
+			const { displayName: username, uid, email } = firebaseUser;
+
+			const user = {
+				username,
+				highscore: 0,
+				createdAt: Date.now(),
+				uid,
+				email,
+			};
+
+			const userRef = await db.collection("users").doc(user.uid);
+			await userRef.set(user);
+			router.push("/");
+		} catch (e) {
+			error.value = e;
+			console.error(error.value);
 		}
 
 		return { user, error };
@@ -67,6 +99,7 @@ export default function useAuth() {
 			} catch (e) {
 				error.value = e;
 			}
+			router.push("/");
 		} catch (e) {
 			error.value = e;
 		}
@@ -77,6 +110,7 @@ export default function useAuth() {
 	return {
 		user,
 		login,
+		loginWithGoogle,
 		logout,
 		register,
 	};
