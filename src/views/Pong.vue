@@ -7,12 +7,12 @@
 		<Card>
 			<div class="game font-mono">
 				<svg
-					class="overflow-auto box-content border-gray-900 border-4"
+					class="overflow-auto box-content"
 					:width="width"
 					:height="height"
 					:viewBox="`0 0 ${width} ${height}`"
 				>
-					<rect :width="width" :height="height" fill="#000" />
+					<rect :width="width" :height="height" fill="#181818" />
 					<text :x="width / 2 - 60" :y="60" fill="#fff" class="text-4xl">
 						{{ paddles[0].score }}
 					</text>

@@ -1,7 +1,7 @@
-import firebase from "firebase/app"
-import "firebase/firestore"
-import "firebase/auth"
-import "firebase/analytics"
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/analytics";
 
 const config = {
 	apiKey: "AIzaSyDQLAHciwtLFm6BIo7m9SkrcBec2dnnCs0",
@@ -12,23 +12,24 @@ const config = {
 	messagingSenderId: "416579751449",
 	appId: "1:416579751449:web:e1a1ff37e06dd10bb2a488",
 	measurementId: "G-RLR0TCSHS2",
-}
+};
 
 // Initialize Firebase
-firebase.initializeApp(config)
-firebase.analytics()
+firebase.initializeApp(config);
+firebase.analytics();
 
-export const auth = firebase.auth()
-export const db = firebase.firestore()
-export default firebase
+export const auth = firebase.auth();
+export const db = firebase.firestore();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export default firebase;
 
 export async function login(email, password) {
-	if (email.trim() == "" || password.trim() == "") return
+	if (email.trim() == "" || password.trim() == "") return;
 
 	try {
-		await auth.signInWithEmailAndPassword(email, password)
+		await auth.signInWithEmailAndPassword(email, password);
 	} catch (e) {
-		console.error(e)
+		console.error(e);
 	}
 }
 
@@ -37,31 +38,31 @@ export async function register(email, username, password) {
 		const userAuth = await auth.createUserWithEmailAndPassword(
 			email,
 			password
-		)
+		);
 
 		await userAuth.user.updateProfile({
 			displayName: username,
-		})
+		});
 		const user = {
 			username,
 			highscore: 0,
 			createdAt: Date.now(),
 			uid: userAuth.user.uid,
 			email: userAuth.user.email,
-		}
+		};
 
-		writeUserData(user)
+		writeUserData(user);
 	} catch (e) {
-		console.error(e.message)
+		console.error(e.message);
 	}
 }
 
 export async function writeUserData(user) {
 	try {
-		const userRef = await db.collection("users").doc(user.uid)
-		await userRef.set(user)
+		const userRef = await db.collection("users").doc(user.uid);
+		await userRef.set(user);
 	} catch (e) {
-		console.error(e)
+		console.error(e);
 	}
 }
 
@@ -69,9 +70,9 @@ export async function getHighscore(uid) {
 	const docRef = await db
 		.collection("users")
 		.doc(uid)
-		.get()
-	const highscore = await docRef.data().highscore
-	return highscore
+		.get();
+	const highscore = await docRef.data().highscore;
+	return highscore;
 }
 
 export async function updateHighscore(uid, highscore) {
@@ -80,6 +81,6 @@ export async function updateHighscore(uid, highscore) {
 			.doc(uid)
 			.update({
 				highscore,
-			})
+			});
 	}
 }
