@@ -1,14 +1,15 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import Home from "@/views/Home.vue"
-import Login from "@/views/Login.vue"
-import Register from "@/views/Register.vue"
-import Snake from "@/views/Snake.vue"
-import Pong from "@/views/Pong.vue"
-import Hangman from "@/views/Hangman.vue"
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "@/views/Home.vue";
+import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
+import Snake from "@/views/Snake.vue";
+import Pong from "@/views/Pong.vue";
+import Hangman from "@/views/Hangman.vue";
+import Profile from "@/views/Profile.vue";
 // import { auth } from "@/firebase"
 // import useAuth from "@/hooks/auth"
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
 	{
@@ -56,13 +57,22 @@ const routes = [
 			requiresAuth: true,
 		},
 	},
-]
+	{
+		path: "/profile",
+		name: "Profile",
+		component: Profile,
+		meta: {
+			title: "joel.ga - Profile",
+			requiresAuth: true,
+		},
+	},
+];
 
 const router = new VueRouter({
 	mode: "history",
 	base: process.env.BASE_URL,
 	routes,
-})
+});
 
 // let currentUser = null
 // auth.onAuthStateChanged(async user => {
@@ -80,13 +90,13 @@ router.beforeEach((to, from, next) => {
 	const nearestWithTitle = to.matched
 		.slice()
 		.reverse()
-		.find(r => r.meta && r.meta.title)
+		.find(r => r.meta && r.meta.title);
 
 	// Find the nearest route element with meta tags.
 	const nearestWithMeta = to.matched
 		.slice()
 		.reverse()
-		.find(r => r.meta && r.meta.metaTags)
+		.find(r => r.meta && r.meta.metaTags);
 	// const previousNearestWithMeta = from.matched
 	// 	.slice()
 	// 	.reverse()
@@ -99,35 +109,35 @@ router.beforeEach((to, from, next) => {
 	// }
 
 	// If a route with a title was found, set the document (page) title to that value.
-	if (nearestWithTitle) document.title = nearestWithTitle.meta.title
+	if (nearestWithTitle) document.title = nearestWithTitle.meta.title;
 
 	// Remove any stale meta tags from the document using the key attribute we set below.
 	Array.from(
 		document.querySelectorAll("[data-vue-router-controlled]")
-	).map(el => el.parentNode.removeChild(el))
+	).map(el => el.parentNode.removeChild(el));
 
 	// Skip rendering meta tags if there are none.
-	if (!nearestWithMeta) return next()
+	if (!nearestWithMeta) return next();
 
 	// Turn the meta tag definitions into actual elements in the head.
 	nearestWithMeta.meta.metaTags
 		.map(tagDef => {
-			const tag = document.createElement("meta")
+			const tag = document.createElement("meta");
 
 			Object.keys(tagDef).forEach(key => {
-				tag.setAttribute(key, tagDef[key])
-			})
+				tag.setAttribute(key, tagDef[key]);
+			});
 
 			// We use this to track which meta tags we create, so we don't interfere with other ones.
-			tag.setAttribute("data-vue-router-controlled", "")
+			tag.setAttribute("data-vue-router-controlled", "");
 
-			return tag
+			return tag;
 		})
 		// Add the meta tags to the document head.
-		.forEach(tag => document.head.appendChild(tag))
+		.forEach(tag => document.head.appendChild(tag));
 
-	next()
-})
+	next();
+});
 
 // router.beforeEach((to, from, next) => {
 // if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -145,4 +155,4 @@ router.beforeEach((to, from, next) => {
 // 	}
 // })
 
-export default router
+export default router;

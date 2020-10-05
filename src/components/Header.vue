@@ -54,16 +54,18 @@
 
 <script>
 import useAuth from "@/hooks/auth";
+import useToggle from "@/hooks/toggle";
 import { computed } from "@vue/composition-api";
 import { useRouter } from "@u3u/vue-hooks";
 
 export default {
 	setup() {
+		const { toggle, show } = useToggle();
 		const { user, logout } = useAuth();
 		const { route, router } = useRouter();
 		const routes = router.options.routes;
 
-		return { user, logout, routes };
+		return { user, logout, routes, toggle, show };
 	},
 };
 </script>
