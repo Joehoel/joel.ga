@@ -6,7 +6,7 @@ const tailwindcss = require("tailwindcss");
 module.exports = {
 	plugins: [
 		tailwindcss,
-		process.env.NODE_ENV === "production" ? require("autoprefixer") : null,
+		autoprefixer,
 		// process.env.NODE_ENV === "production"
 		// 	? cssnano({ preset: "default" })
 		// 	: null,
