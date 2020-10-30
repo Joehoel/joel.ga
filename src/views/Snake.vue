@@ -46,18 +46,12 @@
 					:y="fruit.y"
 					:width="scale"
 					:height="scale"
-					fill="#4299E1"
+					fill="#017050"
 				/>
 			</svg>
 
 			<!-- View Highscores button -->
-			<button
-				id="highscore-button"
-				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-4 rounded shadow-lg"
-				@click="toggle"
-			>
-				View all highscores
-			</button>
+			<button class="btn my-4" @click="toggle">View all highscores</button>
 		</div>
 	</main>
 </template>

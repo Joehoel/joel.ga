@@ -1,9 +1,12 @@
 <template>
-	<div class="wrong-letters absolute top-0 right-0 m-6">
-		<p v-if="wrongLetters.length > 0" class="text-xl font-semibold">Wrong</p>
-		<span v-for="(letter ,i) in wrongLetters" :key="i">
-			<span v-if="i != 0">,</span>
-			{{letter}}
+	<div class="card p-4 relative">
+		<h1 class="text-3xl font-bold mb-2">Wrong letters</h1>
+		<span class="text-xl font-semibold">
+			<span v-if="wrongLetters.length == 0" class="italic">None</span>
+			<span v-else class="uppercase">
+				{{ wrongLetters.join(", ") }}
+			</span>
+			<span class="absolute right-0 mr-4">{{ wrongLetters.length }}</span>
 		</span>
 	</div>
 </template>

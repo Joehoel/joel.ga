@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div>
 		<Header />
 		<router-view />
 	</div>
@@ -14,4 +14,3 @@ export default {
 	},
 };
 </script>
-

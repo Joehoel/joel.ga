@@ -11,6 +11,15 @@ module.exports = {
 				lg: "24px",
 				xl: "48px",
 			},
+			fontFamily: {
+				body: ["Nunito"],
+			},
+			colors: {
+				primary: {
+					default: "#017050",
+					dark: "#00422f",
+				},
+			},
 		},
 	},
 };

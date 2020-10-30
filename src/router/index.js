@@ -7,6 +7,7 @@ import Snake from "@/views/Snake.vue";
 import Pong from "@/views/Pong.vue";
 import Hangman from "@/views/Hangman.vue";
 import Profile from "@/views/Profile.vue";
+import Games from "@/views/Games.vue";
 // import { auth } from "@/firebase"
 // import useAuth from "@/hooks/auth"
 Vue.use(VueRouter);
@@ -31,7 +32,13 @@ const routes = [
 		meta: { title: "joel.ga - Register" },
 	},
 	{
-		path: "/snake",
+		path: "/games",
+		name: "Games",
+		component: Games,
+		meta: { title: "joel.ga - Register" },
+	},
+	{
+		path: "/games/snake",
 		name: "Snake",
 		component: Snake,
 		meta: {
@@ -40,7 +47,7 @@ const routes = [
 		},
 	},
 	{
-		path: "/pong",
+		path: "/games/pong",
 		name: "Pong",
 		component: Pong,
 		meta: {
@@ -49,7 +56,7 @@ const routes = [
 		},
 	},
 	{
-		path: "/hangman",
+		path: "/games/hangman",
 		name: "Hangman",
 		component: Hangman,
 		meta: {

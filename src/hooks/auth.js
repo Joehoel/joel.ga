@@ -44,7 +44,7 @@ export default function useAuth() {
 		const error = ref(null);
 
 		try {
-			const result = await auth.signInWithPopup(GoogleProvider, {});
+			const result = await auth.signInWithPopup(GoogleProvider);
 			const token = await result.credential.accesToken;
 			const firebaseUser = await result.user;
 			const { displayName: username, uid, email } = firebaseUser;
@@ -70,6 +70,7 @@ export default function useAuth() {
 
 	const logout = () => {
 		auth.signOut();
+		user.value = null;
 	};
 
 	const register = async (email, username, password) => {

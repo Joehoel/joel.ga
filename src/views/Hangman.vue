@@ -1,27 +1,46 @@
 <template>
-	<main
-		class="flex flex-col justify-center items-center mt-16 py-4 bg-white rounded shadow-lg container mx-auto px-4 text-center relative"
-	>
-		<Figure :wrongLetters="state.wrongLetters" />
-		<Word :selectedWord="state.selectedWord" :correctLetters="state.correctLetters" />
-		<WrongLetters :wrongLetters="state.wrongLetters" />
+	<main class="mx-auto w-3/4 mt-6">
+		<!-- <section class="card p-6 flex flex-col items-center justify-center mb-4">
+			<Figure :wrongLetters="wrongLetters" />
+			<Word :selectedWord="selectedWord" :correctLetters="correctLetters" />
+		</section>
+		<section class="grid grid-cols-2 gap-4">
+			<Status
+				:correctLetters="correctLetters"
+				:wrongLetters="wrongLetters"
+				:selectedWord="selectedWord"
+				:togglePlayable="togglePlayable"
+				:playAgain="playAgain"
+			/>
+			<WrongLetters :wrongLetters="wrongLetters" />
+		</section> -->
+		<section class="card p-6 text-4xl font-bold text-center">
+			Under maintanence
+		</section>
 	</main>
 </template>
 
 <script>
 import Figure from "@/components/Figure";
 import Word from "@/components/Word";
+import Status from "@/components/Status";
 import WrongLetters from "@/components/WrongLetters";
+import useFetch from "@/hooks/fetch";
 import {
 	computed,
+	onBeforeMount,
 	onMounted,
 	onUnmounted,
 	reactive,
+	ref,
 } from "@vue/composition-api";
 
 export default {
 	setup() {
 		// TODO: Change to use: "https://random-word-api.herokuapp.com/word"
+		const { response, loading, error } = useFetch(
+			"https://random-word-api.herokuapp.com/word"
+		);
 		const state = reactive({
 			words: ["application", "programming", "interface", "wizard"],
 			selectedWord: computed(
@@ -30,6 +49,9 @@ export default {
 			correctLetters: [],
 			wrongLetters: [],
 			playable: true,
+			playAgain: () => {
+				// playable = true
+			},
 		});
 
 		const handleKeydown = (event) => {
@@ -40,19 +62,12 @@ export default {
 				if (state.selectedWord.includes(letter)) {
 					// If the letter is in the correct letters
 					if (!state.correctLetters.includes(letter)) {
-						state.correctLetters = [...state.correctLetters, letter];
+						state.correctLetters.push(letter);
 					}
-					// else {
-					// 	// show(setShowNotification);
-					// }
-					// If the letter is not in the word
 				} else {
 					if (!state.wrongLetters.includes(letter)) {
-						state.wrongLetters = [...state.wrongLetters, letter];
+						state.wrongLetters.push(letter);
 					}
-					// else {
-					// 	// show(setShowNotification);
-					// }
 				}
 			}
 		};
@@ -65,13 +80,14 @@ export default {
 			window.removeEventListener("keydown", handleKeydown);
 		});
 
-		return { state };
+		return { ...state };
 	},
 
 	components: {
 		Figure,
 		WrongLetters,
 		Word,
+		Status,
 	},
 };
 </script>

@@ -85,16 +85,17 @@ export default {
 		const handleSubmit = async () => {
 			errors.email = "";
 			errors.password = "";
+
 			const { error: err } = await login(email.value, password.value);
+
 			if (err.value !== null) {
 				if (err.value.code.includes("email")) {
 					errors.email = err.value.message;
 				} else {
 					errors.password = err.value.message;
 				}
-			} else {
-				await router.push("/");
 			}
+
 			email.value = "";
 			password.value = "";
 		};

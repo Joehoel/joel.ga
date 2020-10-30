@@ -11,6 +11,7 @@ export default function useHighscore() {
 	};
 
 	const updateHighscore = async (uid, highscore) => {
+		console.log("updating highscore", highscore);
 		if (highscore >= (await getHighscore(uid))) {
 			db.collection("users")
 				.doc(uid)
