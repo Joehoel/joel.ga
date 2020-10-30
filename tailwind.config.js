@@ -1,7 +1,7 @@
 module.exports = {
-	purge: {
-		content: ["./src/**/*.html"],
-	},
+	// purge: {
+	// 	content: ["./src/**/*.html"],
+	// },
 	theme: {
 		extend: {
 			padding: {
