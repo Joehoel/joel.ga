@@ -5,8 +5,8 @@
 			:key="`highscore-${index}`"
 			class="py-2 flex justify-between"
 		>
-			<span class="font-medium">{{highscore.username}}</span>
-			<span>{{highscore.highscore}}</span>
+			<span class="font-medium">{{ highscore.username }}</span>
+			<span class="font-semibold">{{ highscore.highscore }}</span>
 		</li>
 	</ol>
 </template>

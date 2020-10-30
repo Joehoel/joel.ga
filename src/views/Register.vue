@@ -6,6 +6,11 @@
 				@submit.prevent="handleSubmit"
 			>
 				<div class="mb-4">
+					<h1 class="font-bold text-center text-2xl">Register</h1>
+					<GoogleLogin />
+				</div>
+
+				<div class="mb-4">
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="email"
 						>Username</label
 					>
@@ -50,7 +55,7 @@
 						<p class="text-red-500 text-xs italic">{{ errors[0] }}</p>
 					</ValidationProvider>
 				</div>
-				<div class="mb-6">
+				<div class="mb-4">
 					<label
 						class="block text-gray-700 text-sm font-bold mb-2"
 						for="password"
@@ -74,20 +79,20 @@
 						<p class="text-red-500 text-xs italic">{{ errors[0] }}</p>
 					</ValidationProvider>
 				</div>
-				<div class="flex items-center justify-between">
-					<button
-						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						type="submit"
-					>
-						Register
-					</button>
+				<button
+					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full my-2"
+					type="submit"
+				>
+					Register
+				</button>
+				<p class="text-sm text-gray-700 mt-2">
+					Already have an account?
 					<router-link
-						class="inline-block align-baseline text-right font-bold text-sm text-blue-500 hover:text-blue-800"
+						class="font-bold text-blue-500 hover:text-blue-800"
 						to="/login"
-						>Login</router-link
-					>
-				</div>
-				<GoogleLogin />
+						>Login
+					</router-link>
+				</p>
 			</form>
 		</div>
 	</div>

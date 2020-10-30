@@ -1,3 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	@apply bg-gray-300 h-screen text-gray-900 font-body;
+}
+
+.btn {
+	@apply bg-primary text-white py-2 px-4 rounded shadow-lg uppercase text-base font-semibold;
+}
+
+.btn:hover {
+	@apply bg-primary-dark;
+}
+
+.card {
+	@apply bg-white rounded overflow-hidden shadow-lg;
+}
+
+.link {
+	@apply text-primary font-semibold;
+}
+.link:hover {
+	@apply text-primary-dark;
+}

@@ -6,6 +6,11 @@
 				@submit.prevent="handleSubmit"
 			>
 				<div class="mb-4">
+					<h1 class="font-bold text-center text-2xl">Login</h1>
+					<GoogleLogin />
+				</div>
+
+				<div class="mb-4">
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="email"
 						>Email</label
 					>
@@ -43,20 +48,20 @@
 					/>
 					<p class="text-red-500 text-xs italic">{{ errors.password }}</p>
 				</div>
-				<div class="flex items-center justify-between">
-					<button
-						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						type="submit"
-					>
-						Sign In
-					</button>
+				<button
+					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full my-2"
+					type="submit"
+				>
+					Login
+				</button>
+				<p class="text-sm text-gray-700 mt-4">
+					Don't have an account?
 					<router-link
 						to="/register"
-						class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-						>Register</router-link
-					>
-				</div>
-				<GoogleLogin />
+						class="font-bold text-blue-500 hover:text-blue-800"
+						>Register
+					</router-link>
+				</p>
 			</form>
 		</div>
 	</div>
@@ -80,16 +85,17 @@ export default {
 		const handleSubmit = async () => {
 			errors.email = "";
 			errors.password = "";
+
 			const { error: err } = await login(email.value, password.value);
+
 			if (err.value !== null) {
 				if (err.value.code.includes("email")) {
 					errors.email = err.value.message;
 				} else {
 					errors.password = err.value.message;
 				}
-			} else {
-				await router.push("/");
 			}
+
 			email.value = "";
 			password.value = "";
 		};

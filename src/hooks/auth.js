@@ -1,4 +1,4 @@
-import { auth, db, googleProvider } from "@/firebase";
+import { auth, db, GoogleProvider } from "@/firebase";
 import { ref, onMounted, onUnmounted } from "@vue/composition-api";
 import router from "@/router";
 
@@ -44,7 +44,7 @@ export default function useAuth() {
 		const error = ref(null);
 
 		try {
-			const result = await auth.signInWithPopup(googleProvider);
+			const result = await auth.signInWithPopup(GoogleProvider);
 			const token = await result.credential.accesToken;
 			const firebaseUser = await result.user;
 			const { displayName: username, uid, email } = firebaseUser;
@@ -70,6 +70,7 @@ export default function useAuth() {
 
 	const logout = () => {
 		auth.signOut();
+		user.value = null;
 	};
 
 	const register = async (email, username, password) => {

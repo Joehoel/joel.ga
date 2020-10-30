@@ -5,6 +5,7 @@ import firebase from "./firebase";
 import App from "./App";
 import router from "./router";
 import hooks from "@u3u/vue-hooks";
+import VueFormulate from "@braid/vue-formulate";
 
 // import VeeValidate from "vee-validate"
 
@@ -15,6 +16,7 @@ import "./assets/styles/index.css";
 Vue.use(VueCompositionAPI);
 Vue.use(hooks);
 Vue.use(firestorePlugin);
+Vue.use(VueFormulate);
 
 Vue.config.productionTip = false;
 

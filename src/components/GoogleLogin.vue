@@ -1,7 +1,8 @@
 <template>
 	<button
-		class="w-full relative text-gray-700 font-bold px-2 py-3 border-2 mt-4 rounded"
+		class="w-full relative text-gray-700 font-bold px-1 py-2 border-2 mt-4 rounded"
 		@click="loginWithGoogle"
+		type="button"
 	>
 		<svg
 			class="absolute mx-2 text-gray-400"
@@ -28,7 +29,7 @@
 				fill="#EB4335"
 			/>
 		</svg>
-		<span class="ml-4"> Sign in with Google </span>
+		<span class="ml-4"> Google </span>
 	</button>
 </template>
 

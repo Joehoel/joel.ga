@@ -1,49 +1,61 @@
 <template>
 	<header
-		class="flex justify-between items-center bg-white py-2 shadow-lg px-4 w-screen select-none"
+		class="flex h-16 bg-white shadow-md select-none"
 		:class="{
-			'fixed w-screen': $route.name == 'Login' || $route.name == 'Register',
+			'': $route.name == 'Login' || $route.name == 'Register',
 		}"
 	>
 		<!-- Navbar -->
-		<nav class="flex items-center tracking-wide">
-			<!-- <h1 class="text-4xl font-bold text-gray-900">
+		<nav class="flex items-center">
+			<!-- <h1 class="text-4xl font-bold text-gray-900"@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap')@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap')@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap')>
 				<router-link to="/">Joël</router-link>
 			</h1> -->
-			<ul class="flex font-semibold">
-				<li v-for="(route, i) in routes" :key="i">
-					<router-link
-						v-if="route.name !== 'Login' && route.name !== 'Register'"
-						class="mr-6 pb-4"
-						:class="{
-							'border-b-2 border-black font-bold': $route.path == route.path,
-						}"
-						:to="route.path"
-						>{{ route.name }}</router-link
-					>
+			<ul class="flex font-bold uppercase">
+				<li
+					class="ml-6 hover:text-black"
+					:class="{
+						'text-black border-b-2 border-primary': $route.path == '/',
+					}"
+				>
+					<router-link class="flex items-start" to="/">
+						<HomeIcon class="mr-2" />Home
+					</router-link>
+				</li>
+				<li
+					class="ml-6 hover:text-black"
+					:class="{
+						'text-black border-b-2 border-primary': $route.path.includes(
+							'/games'
+						),
+					}"
+				>
+					<router-link class="flex items-start" to="/games">
+						<GamesIcon class="mr-2" />Games
+					</router-link>
+				</li>
+				<li
+					class="ml-6 hover:text-black"
+					:class="{
+						'text-black border-b-2 border-primary': $route.path == '/profile',
+					}"
+				>
+					<router-link class="flex items-start" to="/profile">
+						<ProfileIcon class="mr-2" />Profile
+					</router-link>
 				</li>
 			</ul>
 		</nav>
 
 		<!-- Auth container -->
-		<div class="currentUser flex items-center">
-			<div class="flex flex-col text-right text-md" v-if="user">
+		<div class="ml-auto mr-6 flex items-center">
+			<div class="" v-if="user">
 				<router-link to="/login">
-					<button
-						@click="logout"
-						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-					>
-						Logout
-					</button>
+					<button @click="logout" class="btn">Logout</button>
 				</router-link>
 			</div>
 			<div v-if="!user">
 				<router-link to="/login">
-					<button
-						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-					>
-						Login
-					</button>
+					<button class="btn">Login</button>
 				</router-link>
 			</div>
 
@@ -54,16 +66,28 @@
 
 <script>
 import useAuth from "@/hooks/auth";
-import { computed } from "@vue/composition-api";
+import useToggle from "@/hooks/toggle";
+import { computed, onUpdated } from "@vue/composition-api";
 import { useRouter } from "@u3u/vue-hooks";
 
+import HomeIcon from "@/components/icons/HomeIcon";
+import GamesIcon from "@/components/icons/GamesIcon";
+import ProfileIcon from "@/components/icons/ProfileIcon";
+
 export default {
+	components: {
+		HomeIcon,
+		GamesIcon,
+		ProfileIcon,
+	},
+
 	setup() {
+		const { toggle, show } = useToggle();
 		const { user, logout } = useAuth();
 		const { route, router } = useRouter();
 		const routes = router.options.routes;
 
-		return { user, logout, routes };
+		return { user, logout, routes, toggle, show };
 	},
 };
 </script>

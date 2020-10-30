@@ -8,11 +8,12 @@ export default function useUsers() {
 	};
 
 	const getUser = async uid => {
-		const snapshot = await db
+		const userRef = await db
 			.collection("users")
 			.doc(uid)
 			.get();
-		return snapshot;
+
+		return await userRef.data();
 	};
 
 	return {
