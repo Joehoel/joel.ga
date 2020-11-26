@@ -74,15 +74,15 @@ const routes = [
 			requiresAuth: true,
 		},
 	},
-	{
-		path: "/key",
-		name: "Key",
-		component: Key,
-		meta: {
-			title: "joel.ga - Key",
-			requiresAuth: false,
-		},
-	},
+	// {
+	// 	path: "/key",
+	// 	name: "Key",
+	// 	component: Key,
+	// 	meta: {
+	// 		title: "joel.ga - Key",
+	// 		requiresAuth: false,
+	// 	},
+	// },
 ];
 
 const router = new VueRouter({
