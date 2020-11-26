@@ -8,6 +8,7 @@ import Pong from "@/views/Pong.vue";
 import Hangman from "@/views/Hangman.vue";
 import Profile from "@/views/Profile.vue";
 import Games from "@/views/Games.vue";
+import Key from "@/views/Key.vue";
 // import { auth } from "@/firebase"
 // import useAuth from "@/hooks/auth"
 Vue.use(VueRouter);
@@ -71,6 +72,15 @@ const routes = [
 		meta: {
 			title: "joel.ga - Profile",
 			requiresAuth: true,
+		},
+	},
+	{
+		path: "/key",
+		name: "Key",
+		component: Key,
+		meta: {
+			title: "joel.ga - Key",
+			requiresAuth: false,
 		},
 	},
 ];
